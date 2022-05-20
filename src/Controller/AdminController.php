@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Produit;
 use App\Form\ProduitType;
+use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,13 +53,7 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('home');
 
 
-
-
-
         }
-
-
-
 
         // on renvoie à notre template la vue du formulaire chargée dans une variable 'form' grace à la méthode createView()
         return $this->render('admin/ajoutProduit.html.twig', [
@@ -66,7 +61,20 @@ class AdminController extends AbstractController
         ]);
     }
 
+        #[Route('listeProduit', name: 'listeProduit')]
+            public function listeProduit(ProduitRepository $produitRepository): Response
+            {
 
+            $produits=$produitRepository->findAll();
+
+                return $this->render('admin/listeProduit.html.twig', [
+                    'produits'=>$produits
+
+
+                   
+                ]);
+            }
+        
 
 
 
