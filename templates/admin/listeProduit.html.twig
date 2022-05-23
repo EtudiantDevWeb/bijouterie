@@ -39,7 +39,7 @@
                         <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
                             <a class="dropdown-item" href="{{ path('modification', {'id': produit.id}) }}">Modifier</a>
-                            <a class="dropdown-item" href="">Supprimer</a>
+                            <a class="dropdown-item" onclick="return alert('Etes vous sûr de vouloir supprimer ce produit')" href="{{ path('supressionProduit', {'id': produit.id}) }}">Supprimer</a>
                         </div>
                     </div>
                 </div>

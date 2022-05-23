@@ -116,14 +116,30 @@ class AdminController extends AbstractController
 
                         }
 
-
-
-                        return $this->render('admin/modificationProduit.html.twig', [
+                        return $this->render('admin/ajoutProduit.html.twig', [
                             'form'=>$form->createView(),
                             'produit'=>$produit
-
                         ]);
-                    }
+
+
+                                            }
+
+                        #[Route('supressionProduit/{id}', name: 'supressionProduit')]
+                            public function supressionProduit(Produit $produit,EntityManagerInterface $manager): Response
+                            {
+                                $manager->remove($produit); //prepare la requete de suppression
+                                $manager->flush(); //on execute
+                                $this->addFlash('succes', 'Produit supprimé');
+
+                                return $this->redirectToRoute('listeProduit');
+
+                            }
+
+
+
+
+
+
 
 
 
