@@ -46,12 +46,11 @@
             </li>
             <li class="nav-item ms-2 mt-3">
                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                    <a href="" class="btn btn-primary nav-link active">Gestion des catégories</a>
+                    <a href="{{ path('ajoutCategorie') }}" class="btn btn-primary nav-link active">Gestion des catégories</a>
                     <div class="btn-group" role="group">
                         <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
-                            <a class="dropdown-item" href="">Liste catégories</a>
-                            <a class="dropdown-item" href="">Ajout catégorie</a>
+
                         </div>
                     </div>
                 </div>
@@ -100,6 +99,28 @@
         <div class="row justify-content-center mt-4 mb-4">
             <div class="col text-center"><h1>{% block titre %}{% endblock %}</h1></div>
         </div>
+
+
+
+        <div class="container mt-5">
+            {% for message in app.flashes('succes') %}
+            <div class="row">
+                div.col-md6.alert.alert-success.text-center
+                {{ message }}
+            </div>
+        </div>
+        {% endfor %}
+
+
+        <div class="container mt-5">
+            {% for message in app.flashes('danger') %}
+            <div class="row">
+                div.col-md6.alert.alert-danger.text-center
+                {{ message }}
+            </div>
+        </div>
+        {% endfor %}
+
         {% block body %}
 
         {% endblock %}

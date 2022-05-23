@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Categorie;
 use App\Entity\Produit;
+use App\Form\CategorieType;
 use App\Form\ProduitType;
+use App\Repository\CategorieRepository;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -134,6 +137,48 @@ class AdminController extends AbstractController
                                 return $this->redirectToRoute('listeProduit');
 
                             }
+
+                            #[Route('ajoutCategorie', name: 'ajoutCategorie')]
+                            #[Route('modificationCategorie/{id}', name: 'modificationCategorie')]
+
+                                public function gestionCategorie(CategorieRepository $categorieRepository, Request $request, EntityManagerInterface $manager, $id=null): Response
+                                {
+                                    $categories=$categorieRepository->findAll();
+                                    if (!$id):
+
+                                    $categorie=new Categorie();
+                                    else:
+                                    $categorie=$categorieRepository->find($id);
+                                    endif;
+
+                                    $form=$this->createForm(CategorieType::class, $categorie);
+
+                                    $form->handleRequest($request);
+
+                                    if($form->isSubmitted() && $form->isValid()){
+
+                                        $manager->persist($categorie);
+                                        $manager->flush();
+                                        if (!$id):
+                                        $this->addFlash('succes', 'Categorie ajoutée');
+                                        else:
+                                            $this->addFlash('succes', 'Categorie ajoutée');
+                                        endif;
+
+                                        return $this->redirectToRoute('ajoutCategorie');
+                                    }
+
+
+                                    return $this->render('admin/gestionCategorie.html.twig', [
+                                        'form'=>$form->createView(),
+                                        'categories'=>$categories
+
+                                    ]);
+                                }
+
+
+
+
 
 
 
