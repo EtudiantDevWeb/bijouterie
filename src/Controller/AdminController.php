@@ -25,7 +25,7 @@ class AdminController extends AbstractController
         $produit= new Produit();
         // ici on instancie un nouvel objet Produit vide, que l'on va charger avec les informations réceptionnées du formulaire grace à Request
         dump($produit);
-        $form=$this->createForm(ProduitType::class, $produit);
+        $form=$this->createForm(ProduitType::class, $produit, ['ajout'=>true]);
         // ici on instancie un objet Form qui va controller automatiquement la correspondance des champs de formulaire demandés dans ProduitType avec les propriétés de notre entité Produit
         // La méthode createForm() attend 2 arguments, le 1er le nom du formulaire (le type) à utiliser , en second l'entité correspondante à ce formulaire
 
@@ -50,7 +50,7 @@ class AdminController extends AbstractController
             $manager->persist($produit);// ici on prépare la requête
             $manager->flush(); // on execute
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('listeProduit');
 
 
         }
@@ -75,6 +75,55 @@ class AdminController extends AbstractController
                 ]);
             }
         
+
+                #[Route('modificationProduit/{id}', name: 'modification')]
+                    public function modificationProduit(Produit $produit,Request $request, EntityManagerInterface $manager): Response
+                    {
+
+
+                        $form=$this->createForm(ProduitType::class, $produit, ['modification'=>true]);
+
+
+                        $form->handleRequest($request);
+
+
+                        if ($form->isSubmitted() && $form->isValid()){
+
+                            $image=$form->get('modifPhoto')->getData();
+
+                            if($image): //Si on a sélectionné une photo en modification
+
+
+                            $nomImage=date('YmdHis').'_'.$image->getClientOriginalName();
+
+
+                            $image->move($this->getParameter('images_directory'), $nomImage);
+                                $photo=str_replace('upload/','', $produit->getPhoto());
+                                unlink($this->getParameter('images_directory').'/'.$photo);
+
+
+                                $produit->setPhoto('upload/'.$nomImage);
+                            endif;
+
+                            $manager->persist($produit);// ici on prépare la requête
+                            $manager->flush(); // on execute
+
+                            $this->addFlash('success', 'Produit modifié avec success');
+
+
+                            return $this->redirectToRoute('listeProduit');
+
+
+                        }
+
+
+
+                        return $this->render('admin/modificationProduit.html.twig', [
+                            'form'=>$form->createView(),
+                            'produit'=>$produit
+
+                        ]);
+                    }
 
 
 

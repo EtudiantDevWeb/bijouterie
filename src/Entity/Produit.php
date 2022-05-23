@@ -18,6 +18,8 @@ class Produit
     #[Assert\NotBlank(message: "Veuillez remplir ce champ")]
     private $nom;
 
+    public $modifPhoto;
+
     #[ORM\Column(type: 'integer')]
     #[Assert\NotBlank(message: "Veuillez remplir ce champ")]
     private $prix;

@@ -16,6 +16,10 @@ class ProduitType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+
+        if($options['ajout']==true):
+
+
         $builder
             ->add('nom', TextType::class,[
              'required'=>false,
@@ -51,12 +55,53 @@ class ProduitType extends AbstractType
             ])
             ->add('valider', SubmitType::class)
         ;
+        elseif ($options['modification']==true)://Si on est en modification, on demande l'envoi de ce formulaire
+
+            $builder
+                ->add('nom', TextType::class,[
+                    'required'=>false,
+                    'label'=>'Nom',
+                    'attr'=> [
+                        'placeholder'=>'Saissisez le nom'
+                    ]
+
+                ])
+
+                ->add('prix', NumberType::class,[
+                    'required'=>false,
+                    'label'=>'Prix',
+                    'attr'=> [
+                        'placeholder'=>'Saissisez le prix'
+                    ]
+
+                ] )
+                ->add('modifPhoto', FileType::class, [
+                    'required'=>false,
+                    'label'=>'Photo',
+
+
+                ])
+                ->add('description', TextareaType::class,[
+                    'required'=>false,
+                    'label'=>'Description',
+                    'attr'=>[
+                        'placeholder'=>'Saissisez la description'
+                    ]
+
+
+                ])
+                ->add('valider', SubmitType::class)
+            ;
+
+            endif;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Produit::class,
+            'ajout'=>false,
+            'modification'=>false
         ]);
     }
 }
