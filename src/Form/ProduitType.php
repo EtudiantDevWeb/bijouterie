@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Categorie;
 use App\Entity\Produit;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -11,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Config\Security\ProviderConfig\EntityConfig;
 
 class ProduitType extends AbstractType
 {
@@ -20,7 +23,17 @@ class ProduitType extends AbstractType
         if($options['ajout']==true):
 
 
+
+
         $builder
+
+
+            ->add('categorie', EntityType::class,[
+                'required'=>false,
+                'label'=>'Categorie',
+                'class'=>Categorie::class,
+                'choice_label'=>'nom'
+            ])
             ->add('nom', TextType::class,[
              'required'=>false,
             'label'=>'Nom',
@@ -58,6 +71,17 @@ class ProduitType extends AbstractType
         elseif ($options['modification']==true)://Si on est en modification, on demande l'envoi de ce formulaire
 
             $builder
+
+                ->add('categorie', EntityType::class,[
+                    'required'=>false,
+                    'label'=>'Categorie',
+                    'class'=>Categorie::class,
+                    'choice_label'=>'nom',
+                    'placeholder' =>'Saisissez une categorie',
+
+                ])
+
+
                 ->add('nom', TextType::class,[
                     'required'=>false,
                     'label'=>'Nom',
