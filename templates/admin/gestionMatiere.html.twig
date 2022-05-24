@@ -1,12 +1,14 @@
 {% extends 'backoffice.html.twig' %}
 {% block title %}
-    {{ parent() }}liste articles
+    {{ parent() }}liste matieres
 {% endblock %}
 {% block titre %}
-    Liste des articles
+    Liste des matieres
 {% endblock %}
 
 {% block body %}
+
+    <link rel="stylesheet" href="{{ asset('css/select2.css') }}">
 
     {{ form(form) }}
 
@@ -46,12 +48,23 @@
 
         {% else %}
 
-            <h4 class="text-center">Aucune catégorie n'est enregistrée</h4>
+            <h4 class="text-center">Aucune matiere n'est enregistrée</h4>
 
         {% endfor %}
 
         </tbody>
     </table>
+
+    <script src="{{ asset('js/jquery.min.js') }}" ></script>
+    <script src="{{ asset('js/select2.js') }}"  ></script>
+    <script>
+        $(function (){
+
+            $('.select2').select2()
+        })
+
+
+    </script>
 
 
 

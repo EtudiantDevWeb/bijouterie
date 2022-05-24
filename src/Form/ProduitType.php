@@ -29,6 +29,20 @@ class ProduitType extends AbstractType
         $builder
 
 
+
+            ->add('matieres', EntityType::class,[
+                'required'=>false,
+                'label'=>'Matieres',
+                'class'=>Matiere::class,
+                'choice_label'=>'nom',
+                'multiple'=>'true',
+                'attr'=>[
+                    'class'=>'select2',
+                    'date-placeholder'=>'Saisissez une ou des matieres'
+                ]
+            ])
+
+
             ->add('categorie', EntityType::class,[
                 'required'=>false,
                 'label'=>'Categorie',
@@ -82,12 +96,17 @@ class ProduitType extends AbstractType
 
                 ])
 
-//                ->add('matiere', EntityType::class,[
-//                    'required'=>false,
-//                    'label'=>'matiere',
-//                    'class'=>Matiere::class,
-//                    'placeholder'=>'Saisissez une matière',
-//                ])
+               ->add('matieres', EntityType::class,[
+                   'required'=>false,
+                  'label'=>'Matieres',
+                  'class'=>Matiere::class,
+                   'choice_label'=>'nom',
+                   'multiple'=>'true',
+                   'attr'=>[
+                       'class'=>'select2',
+                       'date-placeholder'=>'Saisissez une ou des matieres'
+                   ]
+                ])
 
 
                 ->add('nom', TextType::class,[

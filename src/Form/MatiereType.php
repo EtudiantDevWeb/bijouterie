@@ -18,7 +18,7 @@ class MatiereType extends AbstractType
                 'required'=>false,
                 'label'=> 'Nom',
                 'attr'=>[
-                    'placeholder'=>'Saisissez le nom de la categorie'
+                    'placeholder'=>'Saisissez le nom de la matiere'
                 ]
 
             ])

@@ -14,6 +14,8 @@
             <th scope="col">#</th>
             <th scope="col">Nom</th>
             <th scope="col">Description</th>
+            <th scope="col">Catégorie</th>
+            <th scope="col">Matières</th>
             <th scope="col">Photo</th>
             <th scope="col">Prix</th>
             <th scope="col">Actions</th>
@@ -28,9 +30,23 @@
         {% for produit in produits %}
 
         <tr class="table-active">
-            <td>{{ produit.id }}</td>
+            <td>{{ loop.index }}</td>
             <td>{{ produit.nom}}</td>
             <td>{{ produit.description }}</td>
+            <td>
+                {% if  produit.categorie %}
+                    {{ produit.categorie.nom }}
+                {% endif %}
+               </td>
+            <td><ul>
+
+                {% for matiere in produit.matieres  %}
+                   <li>{{ matiere.nom }}</li>
+
+                {% endfor %}
+                </ul>
+
+            </td>
             <td><img src="{{ asset('')~produit.photo }}" width="50" height="50" alt=""></td>
             <td>{{ produit.prix }}€</td>
             <td><div class="btn-group" role="group" aria-label="Button group with nested dropdown">
@@ -38,8 +54,8 @@
                     <div class="btn-group" role="group">
                         <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
-                            <a class="dropdown-item" href="{{ path('modification', {'id': produit.id}) }}">Modifier</a>
-                            <a class="dropdown-item" onclick="return alert('Etes vous sûr de vouloir supprimer ce produit')" href="{{ path('supressionProduit', {'id': produit.id}) }}">Supprimer</a>
+                            <a class="dropdown-item" href="{{ path('modificationProduit', {'id': produit.id}) }}">Modifier</a>
+                            <a class="dropdown-item" onclick="return alert('Etes vous sûr de vouloir supprimer ce produit')" href="{{ path('suppressionProduit', {'id': produit.id}) }}">Supprimer</a>
                         </div>
                     </div>
                 </div>

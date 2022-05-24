@@ -2,12 +2,15 @@
 
 {% block body %}
 
+    <link rel="stylesheet" href="{{ asset('css/select2.css') }}">
+
+
     {{ form_start(form) }}
     {{ form_row(form.nom) }}
     {{ form_row(form.prix) }}
     {{ form_row(form.description) }}
     {{ form_row(form.categorie) }}
-    {{ form_row(form.matiere) }}
+    {{ form_row(form.matieres) }}
     {{ form_row(form.photo, {'attr':{ 'onChange':'loadFile(event)' } }) }}
 
     <div class="col-md-12 text-center">
@@ -33,6 +36,18 @@
         };
 
     </script>
+
+    <script src="{{ asset('js/jquery.min.js') }}" ></script>
+    <script src="{{ asset('js/select2.js') }}"  ></script>
+    <script>
+        $(function (){
+
+            $('.select2').select2()
+        })
+
+
+    </script>
+
 
 
 {% endblock %}

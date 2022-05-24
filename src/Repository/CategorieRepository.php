@@ -32,11 +32,19 @@ class CategorieRepository extends ServiceEntityRepository
 
     public function remove(Categorie $entity, bool $flush = false): void
     {
+
+        $produits=$entity->getProduits();
+        foreach ($produits as $produit):
+            $produit->setCategorie(null);
+            $this->getEntityManager()->persist($produit);
+        endforeach;
         $this->getEntityManager()->remove($entity);
+
 
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+
     }
 
 //    /**

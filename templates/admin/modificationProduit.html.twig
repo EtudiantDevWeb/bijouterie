@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'backoffice.html.twigr' %}
 
 {% block body %}
 
@@ -14,7 +14,7 @@
     {{ form_row(form.prix) }}
     {{ form_row(form.description) }}
     {{ form_row(form.categorie) }}
-    {{ form_row(form.matiere) }}
+    {{ form_row(form.matieres) }}
         {{ form_row(form.modifPhoto, {'attr':{ 'onChange':'loadFile(event)' } }) }}
 
     <div class="col-md-12 text-center">
