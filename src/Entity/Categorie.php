@@ -20,7 +20,7 @@ class Categorie
     #[Assert\NotBlank(message:'Veuillez saisir ce champs')]
     private $nom;
 
-    #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Produit::class)]
+    #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Produit::class, orphanRemoval: true, cascade:['persist'])]
     private $produits;
 
     public function __construct()

@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Categorie;
+use App\Entity\Matiere;
 use App\Entity\Produit;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -80,6 +81,13 @@ class ProduitType extends AbstractType
                     'placeholder' =>'Saisissez une categorie',
 
                 ])
+
+//                ->add('matiere', EntityType::class,[
+//                    'required'=>false,
+//                    'label'=>'matiere',
+//                    'class'=>Matiere::class,
+//                    'placeholder'=>'Saisissez une matière',
+//                ])
 
 
                 ->add('nom', TextType::class,[

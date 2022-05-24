@@ -25,26 +25,26 @@
 
         <tbody>
 
-        {% for categorie in categories %}
+        {% for matiere in matieres %}
 
             <tr class="table-active">
-                <td>{{ categorie.id }}</td>
-                <td>{{ categorie.nom}}</td>
+                <td>{{ matiere.id }}</td>
+                <td>{{ matiere.nom}}</td>
 
                 <td><div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                         <a href="" class="btn btn-primary nav-link active">Actions</a>
                         <div class="btn-group" role="group">
                             <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                             <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
-                                <a class="dropdown-item" href="{{ path('modificationCategorie', {'id': categorie.id}) }}">Modifier</a>
-                                <a class="dropdown-item" onclick="return alert('Etes vous sûr de vouloir supprimer cette categorie')" href="{{ path('suppressionCategorie', {'id': categorie.id}) }}">Supprimer</a>
+                                <a class="dropdown-item" href="{{ path('modificationMatiere', {'id': matiere.id}) }}">Modifier</a>
+                                <a class="dropdown-item" onclick="return alert('Etes vous sûr de vouloir supprimer cette matiere')" href="{{ path('suppressionMatiere', {'id': matiere.id}) }}">Supprimer</a>
                             </div>
                         </div>
                     </div>
                 </td>
             </tr>
 
-            {% else %}
+        {% else %}
 
             <h4 class="text-center">Aucune catégorie n'est enregistrée</h4>
 
