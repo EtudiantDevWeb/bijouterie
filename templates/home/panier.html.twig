@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+    <table class="table table-hover">
+        <thead>
+        <tr>
+
+            <th scope="col">Nom</th>
+            <th scope="col">Photo</th>
+            <th scope="col">Prix Unitaire</th>
+            <th scope="col">Prix Total</th>
+            <th scope="col">Retirer</th>
+            <th scope="col">Quantité</th>
+            <th scope="col">Ajouter</th>
+            <th scope="col">Annuler</th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+        {% for achat in panier %}
+            <tr class="table-active">
+                <td>{{ achat.produit.nom }}</td>
+                <td><img src="{{ asset('')~achat.produit.photo }}" width="50" height="50" alt=""></td>
+                <td>{{ achat.produit.prix }}€</td>
+                <td>{{ achat.produit.prix * achat.quantite }}€</td>
+                <td><a href="{{ path('retraitPanier', {id: achat.produit.id}) }}" class="btn btn-primary text-white">-</a></td>
+                <td>{{ achat.quantite }}</td>
+                <td><a href="{{ path('ajoutPanier', {'id': achat.produit.id , param: 'panier'}) }}" class="btn btn-primary text-white">+</a></td>
+                <td><a href="{{ path('supprimerPanier', {id: achat.produit.id}) }}" class="btn btn-danger text-white">Annuler</a></td>
+            </tr>
+        {% else %}
+            <h3>Votre panier est vide! <a class="hover" href="{{ path('home') }}">Nos Bijoux</a></h3>
+        {% endfor %}
+
+
+        </tbody>
+    </table>
+
+    <h4 class="mt-3">Total de la commande: <strong> {{ total }} €</strong></h4>
+    <a href="{{ path('viderPanier') }}" class="btn btn-success mt-5">Vider Panier</a>
+
+
+
+
+{% endblock %}
+

@@ -20,7 +20,7 @@
     {% endblock %}
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary pe-5">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ path('home') }}">Bijoux.com</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,9 +43,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">About</a>
                 </li>
+
+            </ul>
+            <div class="d-flex">
+                <a href="{{ path('panier') }}">
+                <i class="far fa-gem fa-3x text-warning me-5"></i></a>
                 {% if app.user %}
-                    <li class="nav-item dropdown mx-e">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-3x"></i></a>
+                    <div class="text-light ms-5 me-5 dropdown mx-e">
+                        <a class="nav-link text-light dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-3x text-light"></i></a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="{{ path('listeProduit') }}">Accès Back-office</a>
                             <a class="dropdown-item" href="#">Another action</a>
@@ -53,9 +58,10 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ path('logout') }}">Deconnexion</a>
                         </div>
-                    </li>
+                    </div>
                 {% endif %}
-            </ul>
+
+            </div>
 
             {% if not app.user  %}
                 <div class="row">

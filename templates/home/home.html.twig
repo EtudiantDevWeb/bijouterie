@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <h4 class="card-title">{{ produit.prix }}€</h4>
                     <p class="card-text">{{ produit.description}}</p>
-                    <a href="">
+                    <a href="{{ path('ajoutPanier', {'id': produit.id, param: 'home'}) }}">
 
                      <div class="bg-dark text-center m-0 p-2">
                         <i class="fas fa-shopping-bag text-white fa-3x"></i></div>
